@@ -24,7 +24,7 @@ cd half-life_web (в терминале/cmd)
 # 2. Установите зависимости
 py -m pip install -r requirements.txt
 # или вручную:
-py -m pip install flask pillow
+py -m pip install flask pillow bcrypt reportlab
 
 # 3. Запустите сервер
 py app.py
