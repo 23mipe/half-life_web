@@ -14,8 +14,8 @@
 # Технологии
 - Backend: Flask (Python)
 - Frontend: HTML5, CSS3 (без JavaScript)
-- База данных: SQLite
-- Хранение сессий: Flask session + SQLite
+- База данных: PostgreSQL
+- Хранение сессий: Flask session + PostgreSQL
 
 
 # Установка и запуск
