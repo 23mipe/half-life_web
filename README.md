@@ -17,9 +17,9 @@
 
 # Установка и запуск
 
-bash
+bash 
 # 1. Скопируйте папку с проектом
-cd half-life_web
+cd half-life_web (в терминале/cmd)
 
 # 2. Установите зависимости
 py -m pip install -r requirements.txt
