@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Результаты поиска{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Результаты поиска по запросу: "{{ query }}"</h1>
+    {% if results %}
+        <div class="search-results">
+            {% for res in results %}
+                <div class="search-item">
+                    <h3><a href="{{ url_for('section', section_name=res.section) }}">{{ res.title }}</a></h3>
+                    <p>{{ res.snippet | safe }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Ничего не найдено. Попробуйте другой запрос (например, «монтировка» или «хедкраб»).</p>
+    {% endif %}
+    <p><a href="{{ url_for('index') }}">← На главную</a></p>
+</div>
+{% endblock %}

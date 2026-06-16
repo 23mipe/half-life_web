@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}Мастер-класс — проверь знания Half‑Life{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="section-hero">
+        <h1>Мастер-класс: Стань учёным Black Mesa</h1>
+        <p>Пройди тест, реши симуляцию и докажи, что достоин HEV-костюма!</p>
+    </div>
+
+    <div class="two-columns">
+        <div class="main-content">
+            <!-- Викторина -->
+            <h2>Викторина «Что ты знаешь о Half‑Life?»</h2>
+            {% if quiz_result is defined %}
+            <div class="quiz-result">
+                <h3>Ваш результат: {{ quiz_result }} из {{ total }} баллов</h3>
+                {% if quiz_result >= 3 %}
+                <p>Отлично! Гордон Фримен гордится тобой.</p>
+                {% else %}
+                <p>Изучи энциклопедию ещё раз — истина где-то рядом.</p>
+                {% endif %}
+            </div>
+            {% endif %}
+            <form method="POST" action="{{ url_for('quiz') }}" class="quiz-form">
+                <div class="question">
+                    <p>1 Кто главный герой Half‑Life?</p>
+                    <input type="text" name="q1" placeholder="Ваш ответ" required>
+                </div>
+                <div class="question">
+                    <p>2️ Какое оружие стало символом серии?</p>
+                    <input type="text" name="q2" placeholder="Ваш ответ" required>
+                </div>
+                <div class="question">
+                    <p>3️ Как называется защитный костюм Гордона?</p>
+                    <input type="text" name="q3" placeholder="Ваш ответ" required>
+                </div>
+                <div class="question">
+                    <p>4️ Кто такие вортигонты?</p>
+                    <input type="text" name="q4" placeholder="Ваш ответ" required>
+                </div>
+                <div class="question">
+                    <p>5️ Кто предлагает Гордону «работу» в конце игры?</p>
+                    <input type="text" name="q5" placeholder="Ваш ответ" required>
+                </div>
+                <button type="submit" class="btn">Проверить ответы</button>
+            </form>
+            <div style="height: 2.5rem;"></div> <!-- Отступ после викторины -->
+
+            <!-- Симуляция действий -->
+            <h2>Симуляция: резонансный каскад</h2>
+            {% if sim_result and 'Симуляция' in sim_result %}
+                <div class="quiz-result">{{ sim_result | safe }}</div>
+            {% endif %}
+            <form method="POST" action="{{ url_for('advanced_quiz') }}">
+                <input type="hidden" name="action" value="simulation">
+                <div class="question">
+                    <p>В лаборатории вспышка, открылся портал. Ваши действия?</p>
+                    <label><input type="radio" name="sim_action" value="evacuate_first" required> Немедленно эвакуироваться и надеть HEV-костюм</label><br>
+                    <label><input type="radio" name="sim_action" value="try_extinguish"> Попробовать потушить огонь лабораторным огнетушителем</label>
+                </div>
+                <button type="submit" class="btn">Проверить решение</button>
+            </form>
+            <div style="height: 2.5rem;"></div> <!-- Отступ после симуляции -->
+
+            <!-- Сортировка оружия -->
+            <h2>Сортировка оружия</h2>
+            {% if sim_result and 'Сортировка оружия' in sim_result %}
+                <div class="quiz-result">{{ sim_result | safe }}</div>
+            {% endif %}
+            <form method="POST" action="{{ url_for('advanced_quiz') }}">
+                <input type="hidden" name="action" value="sort_gear">
+                <div class="question">
+                    <p>Расположи оружие в порядке получения в Black Mesa:</p>
+                    <select name="gear_order" required>
+                        <option value="">Выберите порядок</option>
+                        <option value="монтировка,пистолет,дробовик,арбалет">монтировка → пистолет → дробовик → арбалет</option>
+                        <option value="дробовик,монтировка,арбалет,пистолет">дробовик → монтировка → арбалет → пистолет</option>
+                        <option value="арбалет,дробовик,пистолет,монтировка">арбалет → дробовик → пистолет → монтировка</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Проверить порядок</button>
+            </form>
+            <div style="height: 2.5rem;"></div> <!-- Отступ после сортировки оружия -->
+
+            <!-- Задание: найди ошибку -->
+            <h2>Ошибка в плане эвакуации</h2>
+            {% if sim_result and 'План эвакуации' in sim_result %}
+                <div class="quiz-result">{{ sim_result | safe }}</div>
+            {% endif %}
+            <form method="POST" action="{{ url_for('advanced_quiz') }}">
+                <input type="hidden" name="action" value="find_mistake">
+                <div class="question">
+                    <p>На схеме эвакуации лаборатории указано два выхода, огнетушители, но есть одна грубая ошибка. Что не так?</p>
+                    <label><input type="radio" name="mistake" value="ковер_мешает" required> Ковёр на пути к выходу</label><br>
+                    <label><input type="radio" name="mistake" value="мало_огнетушителей"> Мало огнетушителей</label><br>
+                    <label><input type="radio" name="mistake" value="нет_знаков"> Нет знаков «Выход»</label>
+                </div>
+                <button type="submit" class="btn">Указать ошибку</button>
+            </form>
+        </div>
+
+        <div class="sidebar">
+            <h3>Дополнительные задания</h3>
+            <div class="card" style="margin-bottom: 1rem;">
+                <div class="card-icon"></div>
+                <div class="card-content">
+                    <h3>Чек-лист выживания</h3>
+                    <p>Проверьте готовность к вторжению хедкрабов</p>
+                    <button class="btn" onclick="alert('Чек-лист можно скачать в PDF-отчёте')">Скачать</button>
+                </div>
+            </div>
+
+            <h3>Факт</h3>
+            <p>HEV-костюм Гордона Фримена выдерживает попадания из дробовика и падение с 10 метров.</p>
+
+            <h3>Источники</h3>
+            <ul>
+                <li><a href="https://combineoverwiki.net" target="_blank">Combine OverWiki</a></li>
+                <li><a href="https://half-life.fandom.com" target="_blank">Half‑Life Wiki</a></li>
+                <li><a href="https://valvearchive.com" target="_blank">Valve Archive</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

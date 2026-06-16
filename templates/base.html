@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Half-Life: Black Mesa Database{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/half-life_logo.png') }}" alt="Half-Life Logo">
+            </div>
+            <div class="user-menu">
+                {% if session.username %}
+                    <span>{{ session.username }}</span>
+                    <a href="{{ url_for('logout') }}">Выйти</a>
+                {% else %}
+                    <span>Гость</span>
+                    <a href="{{ url_for('login') }}">Вход</a>
+                    <a href="{{ url_for('register') }}">Регистрация</a>
+                {% endif %}
+                <form action="{{ url_for('search') }}" method="get" class="search-form">
+                    <input type="text" name="q" placeholder="Поиск по базе..." value="{{ request.args.get('q', '') }}">
+                    <button type="submit">Найти</button>
+                </form>
+                <button id="theme-toggle" class="theme-toggle">Тёмная тема</button>
+            </div>
+        </div>
+    </header>
+    <nav class="nav">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('index') }}">Главная</a></li>
+                <li><a href="{{ url_for('section', section_name='history') }}">Инцидент</a></li>
+                <li><a href="{{ url_for('section', section_name='modern') }}">Оружие/враги</a></li>
+                <li><a href="{{ url_for('section', section_name='persons') }}">Герои</a></li>
+                <li><a href="{{ url_for('section', section_name='instructions') }}">Руководство</a></li>
+                <li><a href="{{ url_for('masterclass') }}">Мастер-класс</a></li>
+                <li><a href="{{ url_for('guest_cabinet') }}">Мой кабинет</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+    </div>
+    <main>{% block content %}{% endblock %}</main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 Half‑Life Fan Database | Все права защищены | Black Mesa не одобряет | Оставить отзыв; <a href="https://t.me/+CgV_2snbDhI4Njky" target="_blank">Телеграмм Канал</a></p>
+            <p>Источники: <a href="https://combineoverwiki.net" target="_blank">Combine OverWiki</a></p>
+        </div>
+    </footer>
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-theme');
+        toggle?.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+        });
+    </script>
+</body>
+</html>

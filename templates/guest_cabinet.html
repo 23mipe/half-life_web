@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Мой кабинет{% endblock %}
+{% block content %}
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <h1>{{ 'Кабинет ' + user if user else 'Гостевой терминал' }}</h1>
+        <a href="{{ url_for('export_pdf') }}" class="btn" style="background: #ff6600; width: auto;">Экспорт PDF</a>
+    </div>
+    <div class="two-columns">
+        <div class="main-content">
+            <h2>История просмотров</h2>
+            <ul class="history-list">
+                {% for section_id, name, ts in history %}
+                <li><span>{{ name }}</span> {% if ts %}<span class="timestamp">{{ ts[:16] }}</span>{% endif %}<a href="{{ url_for('section', section_name=section_id) }}" class="badge">Перейти</a></li>
+                {% else %}<li>Нет истории</li>{% endfor %}
+            </ul>
+        </div>
+        <div class="sidebar">
+            <h2>Заметки исследователя</h2>
+            <form action="{{ url_for('add_note') }}" method="POST">
+                <input type="hidden" name="section" value="cabinet">
+                <textarea name="note" rows="3" placeholder="Ваша заметка о Black Mesa..." style="width:100%; padding:0.5rem;"></textarea>
+                <button type="submit" class="btn" style="margin-top:0.5rem;">Добавить</button>
+            </form>
+            <ul class="notes-list">
+                {% for note in notes|reverse %}
+                <li><div>{{ note.text }}</div><div class="timestamp">{{ note.timestamp }}</div>{% if note.section != 'cabinet' %}<small>Раздел: {{ note.section }}</small>{% endif %}</li>
+                {% else %}<li>Нет заметок</li>{% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

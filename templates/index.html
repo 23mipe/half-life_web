@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Главная — Half-Life Database{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="hero">
+        <div class="hero-content">
+            <h1>λ Half‑Life</h1>
+            <p>«Правильный человек в неправильном месте может изменить всё»</p>
+            <p>Исследуйте историю резонансного каскада, оружие, врагов и легендарных героев Black Mesa.</p>
+        </div>
+    </div>
+
+    <div class="section-cards">
+        <a href="{{ url_for('section', section_name='history') }}" class="card">
+            <div class="card-icon">
+                <img src="{{ url_for('static', filename='images/cascade.jpg') }}" alt="Инцидент">
+            </div>
+            <div class="card-content">
+                <h3>Инцидент в Black Mesa</h3>
+                <p>Роковой эксперимент и портал в Зен</p>
+            </div>
+        </a>
+        <a href="{{ url_for('section', section_name='modern') }}" class="card">
+            <div class="card-icon">
+                <img src="{{ url_for('static', filename='images/black_ops.jpg') }}" alt="Оружие и враги">
+            </div>
+            <div class="card-content">
+                <h3>Оружие и враги</h3>
+                <p>Монтировка, дробовик, хедкрабы и HECU</p>
+            </div>
+        </a>
+        <a href="{{ url_for('section', section_name='persons') }}" class="card">
+            <div class="card-icon">
+                <img src="{{ url_for('static', filename='images/gordon_freeman.jpg') }}" alt="Герои">
+            </div>
+            <div class="card-content">
+                <h3>Герои вселенной</h3>
+                <p>Гордон Фримен, G‑Man, Аликс Вэнс</p>
+            </div>
+        </a>
+        <a href="{{ url_for('masterclass') }}" class="card">
+            <div class="card-icon">
+                <img src="{{ url_for('static', filename='images/valve_head.png') }}" alt="Мастер-класс">
+            </div>
+            <div class="card-content">
+                <h3>Мастер-класс</h3>
+                <p>Проверь свои знания о Half‑Life</p>
+            </div>
+        </a>
+    </div>
+
+    <div class="two-columns">
+        <div class="main-content">
+            <h2>Добро пожаловать в энциклопедию Black Mesa</h2>
+            <p>Этот сайт — полное руководство по событиям, персонажам и оружию культовой игры Half‑Life. Узнайте, как простой учёный с монтировкой спас человечество от портального шторма.</p>
+            <hr>
+            <p><strong>Факт:</strong> Разработчики Valve спрятали монтировку в первом же ящике, чтобы игрок никогда не оставался без оружия.</p>
+        </div>
+        <div class="sidebar">
+            <h3>О проекте</h3>
+            <p>Фанатская база, созданная по мотивам вселенной Half‑Life. Данные собраны из официальных источников и игровых файлов.</p>
+            <hr>
+            <h3>Что вы найдёте:</h3>
+            <ul>
+                <li>Причину резонансного каскада</li>
+                <li>Все виды оружия и существ</li>
+                <li>Биографии главных героев</li>
+                <li>Интерактивный тест на знание игры</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

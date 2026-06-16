@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="section-hero">
+        <h1>{{ section.title }}</h1>
+    </div>
+    
+    <div class="two-columns">
+        <div class="main-content">
+            <div class="section-text">
+                {{ section.text | safe }}
+            </div>
+        </div>
+        <div class="sidebar">
+            <div class="section-image">
+                <div style="font-size: 5rem; text-align: center;"></div>
+            </div>
+
+            <h3>Заметка сектора</h3>
+            <form action="{{ url_for('add_note') }}" method="POST">
+                <input type="hidden" name="section" value="{{ section_name }}">
+                <textarea name="note" rows="3" placeholder="Напишите свои мысли о разделе..." style="width: 100%; padding: 0.5rem; border-radius: 8px; border: 1px solid #ddd;"></textarea>
+                <button type="submit" class="btn" style="margin-top: 0.5rem;">Сохранить заметку</button>
+            </form>
+
+            <hr>
+            <h3>Полезные ссылки</h3>
+            <ul>
+                <li><a href="https://combineoverwiki.net" target="_blank">Combine OverWiki</a></li>
+                <li><a href="https://steamcommunity.com/app/70" target="_blank">Half‑Life в Steam</a></li>
+                <li><a href="https://valvesoftware.com" target="_blank">Valve Software</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
