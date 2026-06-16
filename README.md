@@ -18,6 +18,7 @@
 - Frontend: HTML5, CSS3 (без JavaScript)
 - База данных: Neon.com, PostgreSQL
 - Хранение сессий: Flask session + PostgreSQL
+- Движок шаблонов: Jinja
 
 
 # Установка и запуск
