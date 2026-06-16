@@ -3,12 +3,13 @@
 
 
 # Требования
-- Python 3.8 или выше
-- Flask 3.1.3
-- Pillow (опционально, для изображений)
-- Bcrypt 5.0.0
-- Reportlab 4.5.1
-- Psycopg2-binary 2.9.12
+- Python 3.8 (или выше)
+- flask 3.1.3
+- pillow 12.2.0
+- bcrypt 5.0.0
+- reportlab 4.5.1
+- psycopg2-binary 2.9.12
+- gunicorn 23.0.0
 
 
 # Технологии
