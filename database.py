@@ -4,7 +4,7 @@ import json
 import bcrypt
 from datetime import datetime
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "data", "firefighter.db")
+DB_PATH = os.path.join(os.path.dirname(__file__), "data", "half-life.db")
 
 def get_connection():
     return sqlite3.connect(DB_PATH)
