@@ -148,8 +148,12 @@ def get_user_by_username(username):
     cur.close()
     conn.close()
 
-    return user
+    if user:
+        user = list(user)
+        if isinstance(user[3], memoryview):
+            user[3] = bytes(user[3])
 
+    return user
 
 def migrate_guest_data_to_user(user_id, guest_id):
     hist_json, notes_json = load_session(guest_id)
