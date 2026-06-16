@@ -9,19 +9,23 @@
     <div class="two-columns">
         <div class="main-content">
             <h2>История просмотров</h2>
-            <ul class="history-list">
-                {% for section_id, name, ts in history %}
-                <li><span>{{ name }}</span> {% if ts %}<span class="timestamp">{{ ts[:16] }}</span>{% endif %}<a href="{{ url_for('section', section_name=section_id) }}" class="badge">Перейти</a></li>
-                {% else %}<li>Нет истории</li>{% endfor %}
-            </ul>
+            <li>
+                <span>{{ name }}</span>
+                {% if ts %}
+                <span class="timestamp">{{ ts.strftime("%Y-%m-%d %H:%M") }}</span>
+                {% endif %}
+                <a href="{{ url_for('section', section_name=section_id) }}" class="badge">Перейти</a>
+            </li>
         </div>
         <div class="sidebar">
             <h2>Заметки исследователя</h2>
-            <form action="{{ url_for('add_note') }}" method="POST">
-                <input type="hidden" name="section" value="cabinet">
-                <textarea name="note" rows="3" placeholder="Ваша заметка о Black Mesa..." style="width:100%; padding:0.5rem;"></textarea>
-                <button type="submit" class="btn" style="margin-top:0.5rem;">Добавить</button>
-            </form>
+            <li>
+                <div>{{ note.text }}</div>
+                <div class="timestamp">{{ note.timestamp.strftime("%Y-%m-%d %H:%M") }}</div>
+                {% if note.section != 'cabinet' %}
+                <small>Раздел: {{ note.section }}</small>
+                {% endif %}
+            </li>
             <ul class="notes-list">
                 {% for note in notes|reverse %}
                 <li><div>{{ note.text }}</div><div class="timestamp">{{ note.timestamp }}</div>{% if note.section != 'cabinet' %}<small>Раздел: {{ note.section }}</small>{% endif %}</li>
