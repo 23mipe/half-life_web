@@ -6,6 +6,9 @@
 - Python 3.8 или выше
 - Flask 3.1.3
 - Pillow (опционально, для изображений)
+- Bcrypt 5.0.0
+- Reportlab 4.5.1
+- Psycopg2-binary 2.9.12
 
 
 # Технологии
@@ -24,7 +27,7 @@ cd half-life_web (в терминале/cmd)
 # 2. Установите зависимости
 py -m pip install -r requirements.txt
 # или вручную:
-py -m pip install flask pillow bcrypt reportlab
+py -m pip install flask pillow bcrypt reportlab psycopg2-binary
 
 # 3. Запустите сервер
 py app.py
