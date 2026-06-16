@@ -13,9 +13,10 @@
 
 
 # Технологии
+- Хостинг: Vercel.com
 - Backend: Flask (Python)
 - Frontend: HTML5, CSS3 (без JavaScript)
-- База данных: PostgreSQL
+- База данных: Neon.com, PostgreSQL
 - Хранение сессий: Flask session + PostgreSQL
 
 
